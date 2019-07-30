@@ -24,7 +24,7 @@ function cloneOrPull({ full_name, dir, url }) {
   fi`;
 }
 
-(async function() {
+async function main() {
   const client = new Octokit({
     auth: `token ${TOKEN}`
   });
@@ -46,4 +46,6 @@ function cloneOrPull({ full_name, dir, url }) {
   }
 
   console.log("Done");
-})();
+}
+
+main();
