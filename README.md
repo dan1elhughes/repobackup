@@ -4,15 +4,23 @@ A docker container to mirror all owner/collaborator GitHub repositories locally,
 
 ## Getting started
 
-Create a file `.env` with the variables listed below. Alternatively, pass the required variables in manually.
+Create a [personal access token](https://github.com/settings/tokens), with `repo` permissions.
 
 ### Docker
 
 ```shell
-docker run --env DIRECTORY=/mirror -v $(pwd)/mirror:/mirror --env-file ./.env dan1elhughes/repobackup
+docker run \
+-e DIRECTORY=/mirror \
+-e USERNAME=<your-username> \
+-e TOKEN=<your-token> \
+-v $(pwd)/mirror:/mirror \
+--restart always \
+dan1elhughes/repobackup
 ```
 
 ### Local (for debugging/testing)
+
+Put the variables in a `.env` file for easier management.
 
 ```shell
 $ source .env
