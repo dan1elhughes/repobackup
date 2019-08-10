@@ -3,7 +3,9 @@
 const Octokit = require("@octokit/rest");
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
-const { TOKEN, USERNAME } = process.env;
+const { TOKEN, USERNAME, DIRECTORY, PWD } = process.env;
+
+let dir = DIRECTORY || PWD;
 
 if (!TOKEN) {
   console.error("TOKEN is blank");
@@ -14,13 +16,13 @@ if (!USERNAME) {
   process.exit(1);
 }
 
-function cloneOrPull({ full_name, dir, url }) {
+function cloneOrPull({ full_name, output, url }) {
   return `echo ${full_name}
-  if cd ${dir}; then
+  if cd ${output}; then
     git pull | grep -v "up to date"
     cd - > /dev/null
   else
-    git clone ${url} ${dir}
+    git clone ${url} ${output}
   fi`;
 }
 
@@ -34,9 +36,9 @@ async function main() {
   );
 
   const commands = repos.map(({ full_name }) => {
-    const dir = `/mirror/${full_name}`;
+    const output = `${dir}/${full_name}`;
     const url = `https://${TOKEN}@github.com/${full_name}`;
-    return cloneOrPull({ full_name, dir, url });
+    return cloneOrPull({ full_name, output, url });
   });
 
   for (const cmd of commands) {

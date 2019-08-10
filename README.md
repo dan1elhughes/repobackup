@@ -4,7 +4,20 @@ A docker container to mirror all owner/collaborator GitHub repositories locally,
 
 ## Getting started
 
-_Todo_
+Create a file `.env` with the variables listed below. Alternatively, pass the required variables in manually.
+
+### Docker
+
+```shell
+docker run --env DIRECTORY=/mirror -v $(pwd)/mirror:/mirror --env-file ./.env dan1elhughes/repobackup
+```
+
+### Local (for debugging/testing)
+
+```shell
+$ source .env
+$ USERNAME=$USERNAME TOKEN=$TOKEN node script.js
+```
 
 ## Environment variables
 
@@ -12,6 +25,10 @@ _Todo_
 
 `TOKEN`: Your GitHub [personal access token](https://github.com/settings/tokens), with `repo` permissions.
 
+`DIRECTORY`: The directory to store repo mirrors in (within the Docker container). Defaults to `pwd`.
+
 ## Volumes
 
-`/mirror` must be mounted.
+`DIRECTORY` should be mounted to view the repos from outside the container.
+
+## Building

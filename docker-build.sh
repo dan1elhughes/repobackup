@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker build -t repobackup .
+docker build -t dan1elhughes/repobackup .
