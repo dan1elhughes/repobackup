@@ -8,13 +8,20 @@ Create a [personal access token](https://github.com/settings/tokens), with `repo
 
 ### Docker
 
+In the directory you want to store repos in:
+
 ```shell
-docker run \
+$ USERNAME="username"
+$ TOKEN="token"
+
+$ docker run \
+-d \
 -e DIRECTORY=/mirror \
--e USERNAME=<your-username> \
--e TOKEN=<your-token> \
--v $(pwd)/mirror:/mirror \
+-e USERNAME=$USERNAME \
+-e TOKEN=$TOKEN \
+-v $(pwd):/mirror \
 --restart always \
+--name repobackup \
 dan1elhughes/repobackup
 ```
 
