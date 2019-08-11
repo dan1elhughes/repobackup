@@ -16,6 +16,11 @@ if (!USERNAME) {
   process.exit(1);
 }
 
+function log(str) {
+  const ts = new Date().toLocaleString();
+  console.log(`${ts} ${str}`);
+}
+
 function cloneOrPull({ full_name, output, url }) {
   return `echo ${full_name}
   if cd ${output}; then
@@ -43,11 +48,11 @@ async function main() {
 
   for (const cmd of commands) {
     const { stdout, stderr } = await exec(cmd);
-    stdout && console.log("stdout:", stdout);
-    stderr && console.log("stderr:", stderr);
+    stdout && log(`stdout: ${stdout}`);
+    stderr && log(`stderr: ${stderr}`);
   }
 
-  console.log("Done");
+  log(`Done`);
 }
 
 main();
