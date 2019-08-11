@@ -24,7 +24,7 @@ function log(str) {
 function cloneOrPull({ full_name, output, url }) {
   return `echo ${full_name}
   if cd ${output}; then
-    git pull | grep -v "up to date"
+    git fetch && git reset --hard origin/master > /dev/null
     cd - > /dev/null
   else
     git clone ${url} ${output}
