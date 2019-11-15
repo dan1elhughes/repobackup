@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/dan1elhughes/repobackup#readme",
   "dependencies": {
-    "@octokit/rest": "^16.28.7"
+    "@octokit/rest": "^16.28.7",
+    "dotenv-safe": "^8.2.0"
   }
 }

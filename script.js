@@ -1,20 +1,10 @@
 #!/usr/bin/env node
+require("dotenv-safe").config({ path: "/mirror/.env" });
 
 const Octokit = require("@octokit/rest");
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
-const { TOKEN, USERNAME, DIRECTORY, PWD } = process.env;
-
-let dir = DIRECTORY || PWD;
-
-if (!TOKEN) {
-  console.error("TOKEN is blank");
-  process.exit(1);
-}
-if (!USERNAME) {
-  console.error("USERNAME is blank");
-  process.exit(1);
-}
+const { TOKEN, USERNAME, PWD } = process.env;
 
 function log(str) {
   const ts = new Date().toLocaleString();
@@ -41,7 +31,7 @@ async function main() {
   );
 
   const commands = repos.map(({ full_name }) => {
-    const output = `${dir}/${full_name}`;
+    const output = `/mirror/${full_name}`;
     const url = `https://${TOKEN}@github.com/${full_name}`;
     return cloneOrPull({ full_name, output, url });
   });

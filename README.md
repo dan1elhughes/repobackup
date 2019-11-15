@@ -8,33 +8,22 @@ Create a [personal access token](https://github.com/settings/tokens), with `repo
 
 ### Docker
 
+Create the directory you want to store repos in, and put a `.env` file in it. In this example, that is `./mirror`.
+
 In the directory you want to store repos in:
 
 ```shell
-$ USERNAME="username"
-$ TOKEN="token"
-
 $ docker run \
 -d \
--e DIRECTORY=/mirror \
--e USERNAME=$USERNAME \
--e TOKEN=$TOKEN \
--v $(pwd):/mirror \
+-v $(pwd)/mirror:/mirror \
 --restart always \
 --name repobackup \
 dan1elhughes/repobackup
 ```
 
-### Local (for debugging/testing)
-
-Put the variables in a `.env` file for easier management.
-
-```shell
-$ source .env
-$ USERNAME=$USERNAME TOKEN=$TOKEN node script.js
-```
-
 ## Environment variables
+
+_Stored in the `.env` file_.
 
 `USERNAME`: Your GitHub username.
 
@@ -45,5 +34,7 @@ $ USERNAME=$USERNAME TOKEN=$TOKEN node script.js
 ## Volumes
 
 `DIRECTORY` should be mounted to view the repos from outside the container.
+
+It should contain the `.env` file.
 
 ## Building

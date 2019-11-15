@@ -10,8 +10,13 @@ RUN chmod 755 /entry.sh
 WORKDIR /app
 COPY package.json /app
 COPY package-lock.json /app
+
 RUN npm ci
-COPY . /app
+COPY node_modules /app
+
+COPY script.js /app
+COPY .env.example /app
+
 RUN chmod 755 script.js
 
 CMD ["/entry.sh"]
