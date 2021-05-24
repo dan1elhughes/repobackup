@@ -23,7 +23,7 @@ function cloneOrPull({ full_name, output, url }) {
 
 async function main() {
   const client = new Octokit({
-    auth: `token ${TOKEN}`
+    auth: TOKEN,
   });
 
   const repos = await client.paginate(
