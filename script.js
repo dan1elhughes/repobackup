@@ -32,7 +32,7 @@ async function main() {
 
   const commands = repos.map(({ full_name }) => {
     const output = `/mirror/${full_name}`;
-    const url = `https://${TOKEN}@github.com/${full_name}`;
+    const url = `https://${USERNAME}:${TOKEN}@github.com/${full_name}`;
     return cloneOrPull({ full_name, output, url });
   });
 
